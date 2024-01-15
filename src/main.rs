@@ -9,15 +9,6 @@ Tasks
 use std::io::Write;
 use std::io::prelude::*;
 
-// enum Priority{
-//   NeedToDoIt,
-//   ReallyWantToDoIt,
-//   WantToDoIt,
-//   WouldLikeItToGetDone,
-//   Indifferent,
-//   HardToJustify,
-//   WillHate,
-// }
 
 const INLINE_DELIMITER: &'static str = ";;";
 const LINE_BREAK_DELIMITER: &'static str = "x\n";
@@ -36,10 +27,10 @@ impl Task{
       let mut n = String::new();
       let mut des = String::new();
       print!(" - task name: ");
-      std::io::stdout().flush();
+      std::io::stdout().flush().ok();
       stdin.read_line(&mut n).ok();
       print!(" - task description: ");
-      std::io::stdout().flush();
+      std::io::stdout().flush().ok();
       stdin.read_line(&mut des).ok();
 
       out.push(Task{
@@ -98,14 +89,6 @@ impl Project{
     return Project { name: n.trim().to_owned(), tasks: t, priority: p.trim().parse::<u8>().unwrap() }
   }
 
-  // fn load_file_cmd()->Vec<Self>{
-  //   let stdin = std::io::stdin();
-  //   println!("Please Specify Filename:");
-  //   let mut f_name = String::new();
-  //   stdin.read_line(&mut f_name).map_err(|err| println!("{}",err)).ok();
-
-  //   return Self::load(&f_name);
-  // }
   fn load(filename: &str)->Vec<Self>{
     let mut out:Vec<Self> = vec![];
     let mut file;

@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "PlanningAppCore"
+name = "planning_app_core"
 version = "0.1.0"
