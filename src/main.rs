@@ -2,16 +2,33 @@
 Tasks
   - refactor input into convinience methods (template)
   - add priority enumeration
-  - add task data to save stuff
-
+  - 
 */
 
 use std::io::Write;
 use std::io::prelude::*;
+use std::str::FromStr;
 
+// enum Priority{
+//   NeedToDoIt,
+//   ReallyWantToDoIt,
+//   WantToDoIt,
+//   WouldLikeItToGetDone,
+//   Indifferent,
+//   HardToJustify,
+//   WillHate,
+// }
 
 const INLINE_DELIMITER: &'static str = ";;";
 const LINE_BREAK_DELIMITER: &'static str = "x\n";
+
+fn get_input<T: FromStr>(text:&str) -> T{
+  print!("{}",text);
+  std::io::stdout().flush().ok();
+  let mut input = String::new();
+  std::io::stdin().read_line(&mut input).ok();
+  return input.trim().parse::<T>().ok().unwrap();
+}
 
 struct Task{
   name:String,
@@ -23,25 +40,12 @@ impl Task{
   fn make_vec_from_cmd() -> Vec<Self>{
     let mut out: Vec<Self> = vec![];
     loop{
-      let stdin = std::io::stdin();
-      let mut n = String::new();
-      let mut des = String::new();
-      print!(" - task name: ");
-      std::io::stdout().flush().ok();
-      stdin.read_line(&mut n).ok();
-      print!(" - task description: ");
-      std::io::stdout().flush().ok();
-      stdin.read_line(&mut des).ok();
-
       out.push(Task{
-        name:n.trim().to_owned(),
-        description:des.trim().to_owned(),
+        name:get_input::<String>(" - task name: "),
+        description:get_input::<String>(" - task description:"),
         completed:false});
 
-      let mut ans = String::new();
-      println!("Add another task? (y/n)");
-      stdin.read_line(&mut ans).ok();
-      ans = ans.to_lowercase();
+      let ans = get_input::<String>("Add another task? (y/n)").to_lowercase();
       if !(ans == "y" || ans == "yes"){
         break;
       }
@@ -74,19 +78,14 @@ impl Project{
 
   fn make_from_cmd() -> Self{
     println!("Making a new project");
-    let mut n = String::new();
-    let mut p = String::new();
-    let stdin = std::io::stdin();
-    print!(" - name: ");
-    std::io::stdout().flush().unwrap();
-    stdin.read_line(&mut n).map_err(|err| println!("{}",err)).ok();
-    print!(" - priority (0-10): ");
-    std::io::stdout().flush().unwrap();
-    stdin.read_line(&mut p).map_err(|err| println!("{}",err)).ok();
+    let name = get_input::<String>(" - name: ");
+    let priority = get_input::<u8>(" - priority (0-10): ");
 
-    let t = Task::make_vec_from_cmd();
+    let tasks = Task::make_vec_from_cmd();
 
-    return Project { name: n.trim().to_owned(), tasks: t, priority: p.trim().parse::<u8>().unwrap() }
+    return Project { name, 
+      tasks, 
+      priority}
   }
 
   fn load(filename: &str)->Vec<Self>{
