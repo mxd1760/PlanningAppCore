@@ -1,2 +1,13 @@
-t_Make it;;Do all the stuff;;falsex
-p_Mk8tt;;1;;5x
+t_add priority enumeration;;maybe priorities need to have an enum instead of an int?;;false;;0,;;,2x
+t_improve project view;;project view should have options for selecting a project;;false;;0,;;,9x
+t_better error handling for file input;;right now a bad file will crash the program, it should be able to handle a bad file (even if it means starting with an empty file);;false;;0,;;,8x
+t_input validation;;not only do some bad inputs make no sence, sometimes bad input can crash the program;;false;;0,;;,8x
+t_edit tasks;;adding, editing, & deleting tasks should be possible when looking at a project;;false;;0,;;,5x
+t_deleting projects;;projects should be editable as well as deletable when looking at the project;;false;;0,;;,6x
+t_sort tasks by priority;;tasks should be sorted by priority to help the important ones get worked on first;;false;;0,;;,4x
+t_view learning goals;;right now the goals cant be viewed or added;;false;;0,;;,8x
+t_add learning goals;;right now the goals cant be viewed or added;;false;;0,;;,8x
+t_completing tasks workflow;;the whole point of the app is to be able to complete tasks for projects and have them contribute to learning progress. right now none of that is possible;;false;;0,;;,5x
+t_visible priorities;;priority is important in comparison to other tasks so only being able to see one at a time makes no sense. instead the priority should be visible when looking at the full list of tasks;;false;;0,;;,6x
+t_project sorting;;just like tasks, projects can be sorted by priority;;false;;0,;;,5x
+p_PlanningApp;;12;;10x
